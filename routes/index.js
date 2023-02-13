@@ -1,9 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express       = require('express');
+const router        = express.Router();
+const userrouter    = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const routes        = (app) => {
 
-module.exports = router;
+  /* GET home page. */
+  router.get('/', function(req, res, next) {
+      res.render('index', { title: 'Express' });
+  });
+
+  /* GET users listing. */
+  userrouter.get('/', function(req, res, next) {
+      res.send('respond with a resource');
+  });
+
+
+  // ALIAS ROUTES 
+  app.use('/', router);
+  app.use('/api/v1/users', userrouter)
+
+}
+
+module.exports = routes;
